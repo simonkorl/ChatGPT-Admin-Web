@@ -43,7 +43,8 @@ export async function GET(
     case "rate-limit":
       const rateLimit = await ModelRateLimiter.of({
         email,
-        model: "gpt-3.5-turbo",
+        // model: "gpt-3.5-turbo",
+        model: "edu",
       });
       const remain = await rateLimit?.remaining();
       return NextResponse.json({

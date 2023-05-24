@@ -134,9 +134,9 @@ export function Chat() {
         headers: {email},
       }).then((res) => res.json())
   );
-
-  const {role: plan, inviteCode: inviteCode} = PlanAndInviteCode ?? {
-    role: "free",
+  // Korl: Change {role: plan} to {plan: plan} to correctly read user plan:"free", so as to enable Ad functions
+  const {plan: plan, inviteCode: inviteCode} = PlanAndInviteCode ?? {
+    plan: "free",
     inviteCode: "",
   };
 
@@ -159,7 +159,8 @@ export function Chat() {
   // submit user input
   const onUserSubmit = () => {
     if (userInput.length <= 0) return;
-
+    // Advertisement functions
+    // recognise keywords and display Ad.
     if (plan == "free") {
       const keywords = ["中介", "留学", "文书"];
 

@@ -20,7 +20,8 @@ export async function POST(req: NextRequest): Promise<Response> {
 
   const rateLimit = await ModelRateLimiter.of({
     email,
-    model: "gpt-3.5-turbo",
+    // model: "gpt-3.5-turbo",
+    model: "edu",
   });
 
   if (rateLimit) {

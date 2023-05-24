@@ -28,7 +28,8 @@ const makeRequestParam = (
   }
 
   return {
-    model: "gpt-3.5-turbo",
+    // model: "gpt-3.5-turbo",
+    model: "edu",
     conversation: sendMessages,
     stream: options?.stream,
   };
@@ -85,7 +86,10 @@ export async function requestChatStream(
     const res = await fetcher(
       options?.modelConfig?.model === "newbing"
         ? "/api/bots/newbing"
-        : "/api/bots/openai",
+        : 
+        options?.modelConfig?.model === "edu" 
+          ? "/api/bots/edu"
+          : "/api/bots/openai",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

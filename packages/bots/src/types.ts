@@ -75,3 +75,9 @@ export enum BingEventType {
   RESET = "RESET",
   QUERY = "QUERY",
 }
+
+export interface EduPayload {
+  knowledge_base_id: string;
+  question: string;
+  history: string[][];
+}
