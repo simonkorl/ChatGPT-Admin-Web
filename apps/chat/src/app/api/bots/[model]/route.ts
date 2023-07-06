@@ -1,4 +1,4 @@
-import { OpenAIBot, BingBot, EduBot } from "bots";
+import { OpenAIBot, BingBot, EduBot, GlmBot } from "bots";
 import { NextRequest, NextResponse } from "next/server";
 import { gptModel, postPayload } from "@/app/api/bots/typing";
 import { textSecurity } from "@/lib/content";
@@ -42,6 +42,9 @@ export async function POST(
       break;
     case "edu":
       bot = new EduBot();
+      break;
+    case "glm":
+      bot = new GlmBot();
       break;
     default:
       return NextResponse.json(

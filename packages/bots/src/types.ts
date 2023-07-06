@@ -80,4 +80,5 @@ export interface EduPayload {
   knowledge_base_id: string;
   question: string;
   history: string[][];
+  type: string;
 }

@@ -5,7 +5,7 @@ import { streamToLineIterator } from "./utils";
 // const REQUEST_URL = "http://localhost:7861/test";
 const REQUEST_URL = "http://localhost:7861/hack";
 
-export class EduBot extends AbstractBot {
+export class GlmBot extends AbstractBot {
   constructor() {
     super();
   }
@@ -42,7 +42,7 @@ export class EduBot extends AbstractBot {
       knowledge_base_id: "data",
       question: userMessage.content,
       history,
-      type: 'edu'
+      type: 'glm'
     };
 
     const response = await fetch(REQUEST_URL, {

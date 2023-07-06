@@ -43,6 +43,10 @@ export const ALL_MODELS = [
   {
     name: "edu",
     available: true,
+  },
+  {
+    name: 'glm',
+    available: true
   }
 ];
 
