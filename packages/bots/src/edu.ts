@@ -61,7 +61,7 @@ export class EduBot extends AbstractBot {
     const lines = streamToLineIterator(response.body!);
 
     for await (const line of lines) {
-      yield line;
+      yield line + "\n";
     }
   }
 }
