@@ -315,12 +315,14 @@ export const useChatStore = create<ChatStore>()(
 
         if (session.topic === DEFAULT_TOPIC && session.messages.length >= 3) {
           // should summarize topic
-          requestWithPrompt(session.messages, Locale.Store.Prompt.Topic).then(
-            (res) => {
-              get().updateCurrentSession(
-                (session) => (session.topic = trimTopic(res))
-              );
-            }
+          // requestWithPrompt(session.messages, Locale.Store.Prompt.Topic).then( (res) => {
+          //     get().updateCurrentSession(
+          //       (session) => (session.topic = trimTopic(res))
+          //     );
+          //   }
+          // );
+          get().updateCurrentSession(
+             (session) => (session.topic = trimTopic("暂时不支持上下文总结功能，请耐心等候"))
           );
         }
 
