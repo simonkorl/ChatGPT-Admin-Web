@@ -2,8 +2,8 @@ import { AbstractBot } from "./abstract-bot";
 import { AnswerParams, EduPayload } from "./types";
 import { streamToLineIterator } from "./utils";
 
-// const REQUEST_URL = "http://localhost:7861/test";
-const REQUEST_URL = "http://localhost:7861/hack";
+const REQUEST_URL = "http://localhost:7861/test";
+// const REQUEST_URL = "http://localhost:7861/hack"; // 用于输出 hack 结果，只在录制演示视频的时候使用
 
 export class EduBot extends AbstractBot {
   constructor() {

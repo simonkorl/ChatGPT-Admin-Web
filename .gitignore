@@ -11,3 +11,6 @@
 .turbo
 
 **/node_modules/
+
+# redis 配置文件
+.redis.json
