@@ -122,18 +122,22 @@
   ```
 - 运行 python upstash_utils.py init 初始化数据库
 
+如果出现 ssl 的错误则请注意你的 upstash 数据库是否启用了 SSL 验证，可以在 Details 的 TLS/SSL 一列中看到是 enable 还是 disable。如果是 disable 则把界面拉到最底下的 Configuration 部分，然后就可以启动 TLS(SSL)。
+
 ### 4. 配置环境变量
 
 在 apps/chat 目录下编写 .env.local 文件来配置环境变量（这样相对来说更加稳定而且安全）。需要提供至少以下的信息：
 
-  - `REDIS_URL=https://xxxxx.upstash.io`: 你创建的 upstash 数据库
-  - `REDIS_TOKEN=xxxxx`: 你创建的 upstash 数据库访问 token
-  - `JWT_SECRET`: 根据文档的说明，生成一个足够长的随机字符串
+- `REDIS_URL=https://xxxxx.upstash.io`: 你创建的 upstash 数据库
+- `REDIS_TOKEN=xxxxx`: 你创建的 upstash 数据库访问 token
+- `JWT_SECRET=xxxx`: 根据[文档](apps/docs/docs/02-quick-deploy.md)的说明，生成一个足够长的随机字符串
 
-建议修改下面的数值
+建议提供下面提到的变量的数值
 - `OPENAI_ENDPOINT`: 如果要使用 chatgpt，那么最好在无法访问到 chat.openai.com 的地区提供一个网址来作为 endpoint
 - `OPENAI_API_KEY`: 设置之后就可以使用默认的 GPT-3.5 功能（不过在这个版本的代码下需要进行一些手动设置才能使用）
 - `NEXT_PUBLIC_TITLE`: 这是一个字符串，可以改变主页面上的标题
+
+注：请不要在 .env.local 文件中写注释！这会导致问题。
 
 ### 5. 测试运行和登录
 
