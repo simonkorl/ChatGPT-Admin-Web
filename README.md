@@ -253,8 +253,6 @@ export const ALL_MODELS = [
 
 - 在 `apps/chat/src/store/setting/index.ts` 中修改设定的默认值，主要需要修改 model 字段以设定默认 model
 
-- 修改 `apps/chat/src/utils/requests.ts` 中的 makeRequestParam 变量
-
 ```ts
 /***
  * 默认设置, 用于初始化以及重置
@@ -277,6 +275,8 @@ const DEFAULT_CONFIG: ChatConfig = {
   },
 };
 ```
+
+- 修改 `apps/chat/src/utils/requests.ts` 中的 makeRequestParam 变量
 
 ### TODO: 用户类型与权限修改方式
 
