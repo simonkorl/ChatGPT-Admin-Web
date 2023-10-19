@@ -94,8 +94,23 @@ export async function requestChatStream(
       case "glm":
         api = "/api/bots/glm"
         break;
-      default:
+      case "gpt-3.5-turbo":
+      case "gpt-4":
         api = "/api/bots/openai"
+        break;
+      case undefined: {
+        // 此时对话次数过多，网页会请求总结对话内容
+        // 这个时候需要使用大模型总结，目前不支持这个功能
+        console.log("Disable Summarization");
+        let responseText = "记忆功能暂时不可用";
+        const finish = () => {
+          options?.onMessage(responseText, true);
+          controller.abort();
+        };
+        options?.onBlock();
+        return finish();
+      }
+      default:
         break;
     }
     const res = await fetcher(

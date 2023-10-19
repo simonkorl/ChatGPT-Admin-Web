@@ -280,9 +280,98 @@ const DEFAULT_CONFIG: ChatConfig = {
 };
 ```
 
+- 修改 `apps/chat/src/utils/requests.ts` 中的 makeRequestParam 变量
+
 ### TODO: 用户类型与权限修改方式
 
 ### 项目的奇妙小功能
 
 - 对话限额：对话在一定时间内次数过多会导致无法使用某个模型。注：目前这个功能在屏幕的左下角显示的余量是错误的！
 - 弹出式广告：如果输入的问题中包括[中介、留学、文书]其中一个词，并且是免费用户的话，就会弹出广告
+- 目前没有退出登录的选项，必须要手动清楚浏览器的缓存 cookie，这会导致之前的对话信息全部消失
+- 如果对话的论述超出了设定，会自动使用 openai 进行 summerize，目前取消了这个功能 apps/chat/src/store/chat/index.ts, apps/chat/src/utils/requests.ts, 
+```ts
+// add memory prompt
+        toBeSummarizedMsgs.unshift(get().getMemoryPrompt());
+
+        const lastSummarizeIndex = session.messages.length;
+
+        console.log(
+          "[Chat History] ",
+          toBeSummarizedMsgs,
+          historyMsgLength,
+          config.compressMessageLengthThreshold
+        );
+
+        if (historyMsgLength > config.compressMessageLengthThreshold) {
+          requestChatStream(
+            toBeSummarizedMsgs.concat({
+              role: "system",
+              content: Locale.Store.Prompt.Summarize,
+              date: "",
+            }),
+            {
+              filterBot: false,
+              onMessage(message, done) {
+                session.memoryPrompt = message;
+                if (done) {
+                  console.log("[Memory] ", session.memoryPrompt);
+                  session.lastSummarizeIndex = lastSummarizeIndex;
+                }
+              },
+              onBlock() {
+                session.memoryPrompt = "你好, 请问你可以帮我解决什么";
+              },
+              onError(error) {
+                console.error("[Summarize] ", error);
+              },
+            }
+          );
+        }
+
+
+        switch(options?.modelConfig?.model) {
+      case "newbing":
+        api = "/api/bots/newbing"
+        break;
+      case "edu":
+        api = "/api/bots/edu"
+        break;
+      case "glm":
+        api = "/api/bots/glm"
+        break;
+      case "gpt-3.5-turbo":
+      case "gpt-4":
+        api = "/api/bots/openai"
+        break;
+      case undefined: {
+        // 此时对话次数过多，网页会请求总结对话内容
+        // 这个时候需要使用大模型总结，目前不支持这个功能
+        console.log("Disable Summarization");
+        let responseText = "记忆功能暂时不可用";
+        const finish = () => {
+          options?.onMessage(responseText, true);
+          controller.abort();
+        };
+        options?.onBlock();
+        return finish();
+      }
+      default:
+        break;
+    }
+```
+- 在对话的时候，会发生总结 apps/chat/src/store/chat/index.ts
+```ts
+if (session.topic === DEFAULT_TOPIC && session.messages.length >= 3) {
+          // should summarize topic
+          // requestWithPrompt(session.messages, Locale.Store.Prompt.Topic).then( (res) => {
+          //     get().updateCurrentSession(
+          //       (session) => (session.topic = trimTopic(res))
+          //     );
+          //   }
+          // );
+          get().updateCurrentSession(
+             (session) => (session.topic = trimTopic("暂时不支持上下文总结功能，请耐心等候"))
+          );
+        }
+```
