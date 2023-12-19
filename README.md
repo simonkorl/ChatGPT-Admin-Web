@@ -62,6 +62,10 @@
 | packages/bots     | API 接口和自定义模型接口      | 0.0.1           | MIT        |
 | packages/database | 数据库 DAL 以及部分 Logic  | 0.0.1           | MIT        |
 
+## Docker image 构建方法
+
+`docker build . -f apps/chat/Dockerfile`
+
 ## 作者 Author
 
 - [@AprilNEA](https://github.com/AprilNEA)

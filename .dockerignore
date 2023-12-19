@@ -1,0 +1,14 @@
+*
+!turbo.json
+!tsconfig.json
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
+!package.json
+!.gitignore
+!apps
+!packages
+!docs
+**/node_modules
+**/.next
+**/.git
+**/out

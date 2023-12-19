@@ -322,7 +322,7 @@ export const useChatStore = create<ChatStore>()(
           //   }
           // );
           get().updateCurrentSession(
-             (session) => (session.topic = trimTopic("暂时不支持上下文总结功能，请耐心等候"))
+             (session) => (session.topic = trimTopic("新的聊天"))
           );
         }
 

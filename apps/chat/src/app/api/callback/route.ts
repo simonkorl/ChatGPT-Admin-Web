@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { handleCallback } from "@/lib/pay/xunhu";
 import { OrderLogic, SubscriptionLogic } from "database";
-import { prices } from "../../(chat)/pricing/page"
+import { prices } from "@/typing.d"
 
 /**
  * This is the callback interface for processing payment platforms.

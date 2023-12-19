@@ -1,7 +1,6 @@
 import { AbstractBot } from './abstract-bot';
 import { AnswerParams, GPTModel } from './types';
 import { streamToLineIterator } from './utils';
-import * as process from 'process';
 
 const API_END_POINT = process.env.OPENAI_ENDPOINT ?? 'https://api.openai.com';
 const COMPLETIONS_URL = `${API_END_POINT}/v1/chat/completions`;

@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDotEnv": [".env"],
   "pipeline": {
     "build": {
       "dependsOn": [
@@ -10,6 +11,7 @@
         ".next/**",
         "!.next/cache/**"
       ],
+      "dotEnv": [".env.production.local", ".env.local", ".env.production", ".env"],
       "env": [
         "JWT_SECRET",
         "NEXT_PUBLIC_TITLE",
@@ -34,17 +36,21 @@
         "TENCENT_SECRETKEY",
         "BAIDU_APIKEY",
         "BAIDU_SECRETKEY",
-        "EDGE_CONFIG"
+        "EDGE_CONFIG",
+        "EDU_ENDPOINT",
+        "USE_HACK"
       ]
     },
     "test": {
       "dependsOn": [
         "^test"
-      ]
+      ],
+      "dotEnv": [".env.test.local", ".env.test", ".env"]
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "dotEnv": [".env.development.local", ".env.local", ".env.development", ".env"]
     }
   }
 }

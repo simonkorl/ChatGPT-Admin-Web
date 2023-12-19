@@ -2,8 +2,10 @@ import { AbstractBot } from "./abstract-bot";
 import { AnswerParams, EduPayload } from "./types";
 import { streamToLineIterator } from "./utils";
 
-const REQUEST_URL = "http://localhost:7861/test";
-// const REQUEST_URL = "http://localhost:7861/hack"; // 用于输出 hack 结果，只在录制演示视频的时候使用
+const BASE_EDU_END_POINT = process.env.EDU_ENDPOINT ?? "localhost:7861";
+const USE_HACK = process.env.USE_HACK ?? "false";
+
+const REQUEST_URL = JSON.parse(USE_HACK) ? `http://${BASE_EDU_END_POINT}/hack`: `http://${BASE_EDU_END_POINT}/test`;
 
 export class EduBot extends AbstractBot {
   constructor() {
